@@ -3,9 +3,9 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="text-gray-600 body-font">
-      <div className="bg-gray-100">
-        <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+    <footer className="body-font">
+      <div className="footer">
+        <div className="container px-5 py-6 mx-auto flex items-center justify-center sm:flex-row flex-col">
           <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
             <span className="ml-3 text-xl">Ollin Portfolio</span>
           </a>
@@ -21,10 +21,7 @@ const Footer = () => {
             </a>
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-            <Link
-              href={"https://github.com/dhdpekfa1"}
-              className="ml-3 text-gray-500"
-            >
+            <Link href={"https://github.com/dhdpekfa1"} className="sns_btn">
               <svg
                 fill="currentColor"
                 strokeLinecap="round"
@@ -38,7 +35,7 @@ const Footer = () => {
             </Link>
             <Link
               href={"https://www.instagram.com/oh_yedam"}
-              className="ml-3 text-gray-500"
+              className="sns_btn"
             >
               <svg
                 fill="none"
@@ -53,10 +50,7 @@ const Footer = () => {
                 <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" />
               </svg>
             </Link>
-            <Link
-              href={"www.linkedin.com/in/ollin0508"}
-              className="ml-3 text-gray-500"
-            >
+            <Link href={"www.linkedin.com/in/ollin0508"} className="sns_btn">
               <svg
                 fill="currentColor"
                 stroke="currentColor"

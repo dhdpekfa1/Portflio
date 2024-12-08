@@ -17,7 +17,7 @@ const Header = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
-            className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+            className="w-10 h-10 text-white p-2 bg-[#6ea368] rounded-full"
             viewBox="0 0 24 24"
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
@@ -25,13 +25,13 @@ const Header = () => {
           <span className="ml-3 text-xl">오예닮 포트폴리오</span>
         </Link>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <Link href={"/"} className="mr-5 hover:text-gray-900">
+          <Link href={"/"} className="nev_btn">
             홈
           </Link>
-          <Link href={"/projects"} className="mr-5 hover:text-gray-900">
+          <Link href={"/projects"} className="nev_btn">
             프로젝트
           </Link>
-          <Link href={"/about-me"} className="mr-5 hover:text-gray-900">
+          <Link href={"/about-me"} className="nev_btn">
             연락처
           </Link>
         </nav>

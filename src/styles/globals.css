@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-primary {
+  @apply bg-[#fefefe] dark:bg-[#222];
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-[#222] dark:text-[#efefef];
+}
+
+.footer {
+  @apply text-[#ddd] bg-gray-100 dark:text-[#efefef] dark:bg-[#333];
+}
+
+a {
+  @apply text-[#333]  dark:text-[#efefef] dark:hover:text-white;
+}
+
+p {
+  @apply text-[#333] dark:text-[#efefef];
+}
+
+.sns_btn {
+  @apply ml-3 text-gray-500 border border-gray-300 p-1 rounded-lg hover:border hover:border-gray-300 hover:bg-gray-300 hover:text-slate-800 dark:hover:text-slate-800;
+}
+.project_btn {
+  @apply inline-flex text-white bg-[#6ea368] py-2 px-6 focus:outline-none hover:bg-[#84c27d] rounded text-lg hover:border-none;
+}
+.nev_btn {
+  @apply mr-5 hover:text-gray-900 hover:border-t-2 hover:border-b-2 hover:border-[#6ea368] dark:hover:border-b-2 dark:hover:border-t-2 dark:hover:border-[#6ea368];
+}

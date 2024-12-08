@@ -18,9 +18,7 @@ export default function Home() {
             <p className="mb-8 leading-relaxed">TODO: 자기 소개 작성</p>
             <div className="flex justify-center">
               <Link href={"/projects"}>
-                <button className="inline-flex text-white bg-[#6ea368] border-0 py-2 px-6 focus:outline-none hover:bg-[#84c27d] rounded text-lg">
-                  프로젝트 확인
-                </button>
+                <button className="project_btn">프로젝트 확인</button>
               </Link>
             </div>
           </div>

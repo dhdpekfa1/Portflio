@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${roboto.variable} ${notoSans.variable}`}>
+      <body className={`${roboto.variable} ${notoSans.variable} bg-primary `}>
         <ThemeProvider attribute="class">
           <Header />
           {children}
