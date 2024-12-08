@@ -1,4 +1,5 @@
 import AnimationLottie from "@/components/animation";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -16,9 +17,11 @@ export default function Home() {
             </h1>
             <p className="mb-8 leading-relaxed">TODO: 자기 소개 작성</p>
             <div className="flex justify-center">
-              <button className="inline-flex text-white bg-[#6ea368] border-0 py-2 px-6 focus:outline-none hover:bg-[#84c27d] rounded text-lg">
-                프로젝트 확인
-              </button>
+              <Link href={"/projects"}>
+                <button className="inline-flex text-white bg-[#6ea368] border-0 py-2 px-6 focus:outline-none hover:bg-[#84c27d] rounded text-lg">
+                  프로젝트 확인
+                </button>
+              </Link>
             </div>
           </div>
         </div>

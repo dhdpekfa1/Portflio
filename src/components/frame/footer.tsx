@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -9,18 +10,21 @@ const Footer = () => {
             <span className="ml-3 text-xl">Ollin Portfolio</span>
           </a>
           <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">
-            © 2020 Tailblocks —
+            © 2024 —
             <a
               href="https://twitter.com/knyttneve"
               rel="noopener noreferrer"
               className="text-gray-600 ml-1"
               target="_blank"
             >
-              @knyttneve
+              @dhdpekfa1
             </a>
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-            <a className="text-gray-500">
+            <Link
+              href={"https://github.com/dhdpekfa1"}
+              className="ml-3 text-gray-500"
+            >
               <svg
                 fill="currentColor"
                 strokeLinecap="round"
@@ -29,22 +33,13 @@ const Footer = () => {
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                <path d="M12 0.297C5.373 0.297 0 5.67 0 12.297c0 5.302 3.438 9.8 8.207 11.387.6.113.793-.26.793-.577 0-.285-.01-1.04-.016-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.754-1.333-1.754-1.089-.744.083-.729.083-.729 1.205.085 1.84 1.236 1.84 1.236 1.07 1.835 2.807 1.305 3.492.997.107-.776.419-1.305.762-1.605-2.665-.305-5.466-1.333-5.466-5.931 0-1.31.468-2.382 1.235-3.222-.123-.303-.536-1.526.117-3.176 0 0 1.007-.322 3.3 1.23a11.52 11.52 0 013.004-.404c1.018.005 2.042.137 3.004.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.65.242 2.873.12 3.176.77.84 1.232 1.912 1.232 3.222 0 4.61-2.807 5.623-5.478 5.92.43.37.824 1.102.824 2.222 0 1.606-.014 2.896-.014 3.286 0 .32.192.694.8.576C20.565 22.092 24 17.594 24 12.297 24 5.67 18.627 0.297 12 0.297z" />{" "}
               </svg>
-            </a>
-            <a className="ml-3 text-gray-500">
-              <svg
-                fill="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-              </svg>
-            </a>
-            <a className="ml-3 text-gray-500">
+            </Link>
+            <Link
+              href={"https://www.instagram.com/oh_yedam"}
+              className="ml-3 text-gray-500"
+            >
               <svg
                 fill="none"
                 stroke="currentColor"
@@ -55,10 +50,13 @@ const Footer = () => {
                 viewBox="0 0 24 24"
               >
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" />
               </svg>
-            </a>
-            <a className="ml-3 text-gray-500">
+            </Link>
+            <Link
+              href={"www.linkedin.com/in/ollin0508"}
+              className="ml-3 text-gray-500"
+            >
               <svg
                 fill="currentColor"
                 stroke="currentColor"
@@ -71,10 +69,10 @@ const Footer = () => {
                 <path
                   stroke="none"
                   d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
-                ></path>
+                />
                 <circle cx="4" cy="4" r="2" stroke="none"></circle>
               </svg>
-            </a>
+            </Link>
           </span>
         </div>
       </div>
