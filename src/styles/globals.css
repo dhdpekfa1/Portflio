@@ -36,3 +36,7 @@ p {
 .nev_btn {
   @apply mr-5 hover:text-gray-900 hover:border-t-2 hover:border-b-2 hover:border-[#6ea368] dark:hover:border-b-2 dark:hover:border-t-2 dark:hover:border-[#6ea368];
 }
+
+.project_item {
+  @apply m-3 flex flex-col bg-[#efefef] dark:bg-slate-500 rounded-xl;
+}

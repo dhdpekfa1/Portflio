@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Roboto, Noto_Sans } from "next/font/google";
 import { Footer, Header } from "@/components/frame";
-import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
 
 const roboto = Roboto({
@@ -28,8 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${roboto.variable} ${notoSans.variable} bg-primary `}>
-        <ThemeProvider attribute="class">
+      <body className={`${roboto.variable} ${notoSans.variable}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem={true}
+        >
           <Header />
           {children}
           <Footer />
