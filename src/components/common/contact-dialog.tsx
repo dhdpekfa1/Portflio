@@ -39,7 +39,7 @@ const ContactDialog = () => {
         <CardContent>
           <div className="flex flex-col gap-2">
             {data.map((item) => (
-              <div className="flex gap-2">
+              <div key={item.label} className="flex gap-2">
                 <span className="text-gray-600">{item.label}: </span>
                 <a
                   href={item.contact}
