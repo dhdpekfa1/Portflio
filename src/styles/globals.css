@@ -31,7 +31,7 @@ p {
   @apply ml-3 text-gray-500 border border-gray-300 p-1 rounded-lg hover:border hover:border-gray-300 hover:bg-gray-300 hover:text-slate-800 dark:hover:text-slate-800;
 }
 .project_btn {
-  @apply inline-flex text-white bg-primary py-2 px-6 focus:outline-none hover:bg-secondary rounded text-lg hover:border-none;
+  @apply inline-flex text-white bg-secondary py-2 px-6 focus:outline-none hover:bg-primary rounded text-lg hover:border-none;
 }
 .nev_btn {
   @apply mr-5 hover:text-gray-900 hover:border-t-2 hover:border-b-2 hover:border-primary dark:hover:border-b-2 dark:hover:border-t-2 dark:hover:border-secondary;
