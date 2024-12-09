@@ -39,7 +39,7 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
         <h3 className="text-xl">{description}</h3>
         <Link
           href={githubUrl}
-          className="w-fit text-gray-800 dark:text-gray-300 hover:text-secondary hover:scale-105"
+          className="w-fit text-gray-800 dark:text-gray-300 hover:text-secondary dark:hover:text-primary hover:scale-105"
         >
           github 바로가기
         </Link>
