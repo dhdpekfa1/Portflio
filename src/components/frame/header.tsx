@@ -62,9 +62,8 @@ const Header = () => {
           >
             연락처
           </Link>
+          <ThemeToggleButton />
         </nav>
-
-        <ThemeToggleButton />
       </div>
     </header>
   );

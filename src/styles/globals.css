@@ -34,7 +34,7 @@ p {
   @apply inline-flex text-white bg-secondary py-2 px-6 focus:outline-none hover:bg-primary rounded text-lg hover:border-none;
 }
 .nev_btn {
-  @apply mr-5 hover:text-gray-900 hover:border-t-2 hover:border-b-2 hover:border-primary dark:hover:border-b-2 dark:hover:border-t-2 dark:hover:border-secondary;
+  @apply mr-5 hover:text-gray-900 hover:border-t-2 hover:border-b-2 hover:border-point dark:hover:border-b-2 dark:hover:border-t-2 dark:hover:border-second;
 }
 
 .project_card {
