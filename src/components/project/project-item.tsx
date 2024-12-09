@@ -39,7 +39,7 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
         <h3 className="text-xl">{description}</h3>
         <Link
           href={githubUrl}
-          className="w-fit text-gray-800 dark:text-gray-300 hover:text-secondary dark:hover:text-primary hover:scale-105"
+          className="w-fit text-gray-800 dark:text-gray-300 hover:text-second dark:hover:text-point hover:scale-105"
         >
           github 바로가기
         </Link>
@@ -48,9 +48,9 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
           {calculatePeriod(startDate, endDate)}일)
         </span>
 
-        <div className="flex items-start mt-2 gap-2">
+        <div className="flex flex-wrap items-start mt-2 gap-2">
           {tags.map((tag) => (
-            <div key={tag.id} className="bg-secondary rounded-lg px-2 py-1">
+            <div key={tag.id} className="bg-second rounded-lg px-2 py-1">
               <p className="text-xs text-white">{tag.name}</p>
             </div>
           ))}
