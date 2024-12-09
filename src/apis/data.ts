@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const NOTION_API_BASE_URL = "https://api.notion.com/v1";
-const TOKEN = process.env.TOKEN;
-const DATABASE_ID = process.env.DATABASE_ID;
+const TOKEN = process.env.NOTION_TOKE;
+const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 const notionClient = axios.create({
   baseURL: NOTION_API_BASE_URL,
