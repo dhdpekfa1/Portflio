@@ -17,16 +17,12 @@ export const getDataList = async () => {
   try {
     const res = await notionClient.post(`/databases/${DATABASE_ID}/query`);
 
-    if (!res) {
-      throw new Error();
+    if (!res || !res.data || !res.data.results) {
+      throw new Error("Invalid response structure");
     }
     return res.data.results;
   } catch (err) {
     console.error("Error querying Notion database:", err);
-    return {
-      props: {
-        projects: [],
-      },
-    };
+    return [];
   }
 };
