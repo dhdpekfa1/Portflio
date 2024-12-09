@@ -21,12 +21,14 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
           <Image
             src={coverUrl}
             alt="project img"
-            layout="responsive"
-            width={16}
-            height={9}
-            objectFit="cover"
+            width={1600}
+            height={900}
             quality={100}
-            className="rounded-t-xl"
+            className="rounded-t-xl object-cover"
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
           />
         ) : (
           <ProjectAnimationLottie />
