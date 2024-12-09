@@ -5,6 +5,7 @@ import { NotionPage } from "@/types/data";
 
 const ProjectPage = async () => {
   const data: NotionPage[] = await getDataList();
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-5 py-8">
       <h1 className="text-2xl font-bold ml-auto mr-8">
