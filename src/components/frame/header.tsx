@@ -2,10 +2,37 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ThemeToggleButton from "../common/theme-toggle-button";
+import { ThemeToggleButton, ContactDialog } from "@/components/common";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  Card,
+  CardHeader,
+} from "@/components/ui";
+import Image from "next/image";
 
 const Header = () => {
   const pathname = usePathname();
+
+  const data = [
+    {
+      label: "email",
+      contact: "dhdpekfa1@daum.net",
+    },
+    {
+      label: "github",
+      contact: " https://github.com/dhdpekfa1",
+    },
+    {
+      label: "kakaoTalk",
+      contact: "dhdpekfa",
+    },
+  ];
 
   return (
     <header className="text-gray-600 body-font">
@@ -60,8 +87,9 @@ const Header = () => {
                 : ""
             }`}
           >
-            연락처
+            자기소개
           </Link>
+          <ContactDialog />
           <ThemeToggleButton />
         </nav>
       </div>
