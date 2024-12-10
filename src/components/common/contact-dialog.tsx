@@ -14,15 +14,15 @@ const ContactDialog = () => {
     {
       label: "email",
       info: "dhdpekfa1@daum.net",
-      contact: "mailto:dhdpekfa1@daum.net", // 이메일 클릭 시 이메일 앱 열기
+      contact: "mailto:dhdpekfa1@daum.net",
     },
     {
       label: "github",
-      contact: "https://github.com/dhdpekfa1", // 깃허브 링크
+      contact: "https://github.com/dhdpekfa1",
     },
     {
       label: "kakaoTalk",
-      contact: null, // 카카오톡은 클릭 동작 없도록 설정
+      contact: "dhdpekfa",
     },
   ];
 
@@ -36,7 +36,11 @@ const ContactDialog = () => {
           <DialogTitle className="text-lg font-bold text-second">
             연락처
           </DialogTitle>
-          <CardDescription>TODO: 짧은 소개 || 인사말</CardDescription>
+          <CardDescription className="pt-1 -pb-2">
+            오늘도 살아가며, 배울 수 있어
+            <br />
+            행복하고 감사합니다 ☘️
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-2">
