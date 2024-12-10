@@ -9,10 +9,10 @@ import {
 
 const AboutMe = () => {
   return (
-    <div className="flex items-center justify-center">
-      <Card className="max-h-screen w-fit m-8 bg-ef dark:bg-slate-800 border border-gray-200">
+    <div className="flex items-center justify-center h-screen">
+      <Card className="w-[85%] h-[80%] m-8 bg-ef dark:bg-slate-800 border border-gray-200">
         <CardHeader>
-          <CardTitle className="text-lg font-bold text-second">
+          <CardTitle className="text-3xl font-bold text-second">
             TODO: 자기소개서
           </CardTitle>
           <CardDescription>장점</CardDescription>
