@@ -7,7 +7,7 @@ const NOTION_TOKEN = process.env.NOTION_TOKEN;
 export async function GET(
   req: Request,
   context: { params: { blockId: string } }
-) {
+): Promise<NextResponse> {
   const { blockId } = context.params;
 
   if (!NOTION_TOKEN || !blockId) {
