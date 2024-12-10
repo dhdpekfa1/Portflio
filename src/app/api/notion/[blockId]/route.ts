@@ -1,23 +1,23 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 const NOTION_API_BASE_URL = "https://api.notion.com/v1";
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 
 export async function GET(
-  req: Request,
-  context: { params: { blockId: string } }
+  req: NextRequest,
+  { params }: { params: Promise<{ blockId: string }> }
 ): Promise<NextResponse> {
-  const { blockId } = context.params;
-
-  if (!NOTION_TOKEN || !blockId) {
-    return NextResponse.json(
-      { error: "Missing required parameters or environment variables." },
-      { status: 400 }
-    );
-  }
-
   try {
+    const { blockId } = await params;
+
+    if (!NOTION_TOKEN || !blockId) {
+      return NextResponse.json(
+        { error: "Missing required parameters or environment variables." },
+        { status: 400 }
+      );
+    }
+
     const response = await axios.get(
       `${NOTION_API_BASE_URL}/blocks/${blockId}/children`,
       {
