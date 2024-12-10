@@ -3,36 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggleButton, ContactDialog } from "@/components/common";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  Card,
-  CardHeader,
-} from "@/components/ui";
-import Image from "next/image";
 
 const Header = () => {
   const pathname = usePathname();
-
-  const data = [
-    {
-      label: "email",
-      contact: "dhdpekfa1@daum.net",
-    },
-    {
-      label: "github",
-      contact: " https://github.com/dhdpekfa1",
-    },
-    {
-      label: "kakaoTalk",
-      contact: "dhdpekfa",
-    },
-  ];
 
   return (
     <header className="text-gray-600 body-font">
