@@ -31,6 +31,7 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
                 width: "100%",
                 height: "auto",
               }}
+              priority
             />
           ) : (
             <ProjectAnimationLottie />
@@ -53,10 +54,12 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
             작업 기간: {startDate} ~ {endDate} (
             {calculatePeriod(startDate, endDate)}일)
           </span>
-
-          <div className="flex flex-wrap items-start mt-2 gap-2">
+          <div className="max-w-full flex flex-nowrap items-start mt-2 gap-2 overflow-x-scroll whitespace-nowrap">
             {tags.map((tag) => (
-              <div key={tag.id} className="bg-second rounded-lg px-2 py-1">
+              <div
+                key={tag.id}
+                className="bg-second rounded-lg px-2 py-1 flex-shrink-0"
+              >
                 <p className="text-xs text-white">{tag.name}</p>
               </div>
             ))}

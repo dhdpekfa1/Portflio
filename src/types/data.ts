@@ -140,6 +140,8 @@ export interface Block {
     color: string;
     rich_text: RichText[];
   };
+  image?: Image;
+  [key: string]: unknown;
 }
 interface Annotation {
   bold: boolean;
@@ -164,4 +166,16 @@ interface RichText {
 interface Parent {
   type: "page_id";
   page_id: string;
+}
+
+interface Image {
+  caption: {
+    plain_text: string;
+  }[];
+  external?: {
+    url: string;
+  };
+  file?: {
+    url: string;
+  };
 }

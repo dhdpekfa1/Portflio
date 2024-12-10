@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
+import Image from "next/image";
 import {
   Dialog,
   DialogTrigger,
@@ -13,7 +14,6 @@ import {
 } from "@/components/ui";
 import { getBlockChildren } from "@/apis/data";
 import { Block } from "@/types/data";
-import Image from "next/image";
 
 interface ProjectDialogProps {
   children: ReactNode;
@@ -37,17 +37,58 @@ const ProjectDialog = ({
     }
   }, [isDialogOpen]);
 
-  useEffect(() => {
-    console.log("Updated blockData:", blockData);
-  }, [blockData]);
-
   const fetchData = async () => {
     const res = await getBlockChildren(pageId);
     if (!res) {
       console.error("page-dialog :", res);
       return;
     }
+    console.log(res);
     setBlockData(res);
+  };
+
+  const renderBlockContent = (block: Block) => {
+    switch (block.type) {
+      case "image":
+        if (block.image?.external?.url) {
+          return (
+            <a
+              href={block.image.external.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={block.image.external.url}
+                alt="Project Image"
+                width={800}
+                height={450}
+                className="rounded-lg"
+                priority
+              />
+            </a>
+          );
+        }
+        break;
+      case "paragraph":
+      case "heading_1":
+      case "heading_2":
+      case "heading_3":
+      case "bulleted_list_item":
+      case "numbered_list_item":
+        const richText = (
+          block[block.type] as { rich_text: { plain_text: string }[] }
+        )?.rich_text;
+        if (richText?.length > 0) {
+          return richText.map((text, index) => (
+            <p key={index} className={getTextStyle(block.type)}>
+              {text.plain_text}
+            </p>
+          ));
+        }
+        break;
+      default:
+        return null;
+    }
   };
 
   const getTextStyle = (type: string) => {
@@ -60,15 +101,13 @@ const ProjectDialog = ({
         return "text-xl font-medium mt-4 mb-2";
       case "paragraph":
         return "text-base";
-      case "image":
-        return "w-[80%]";
       default:
         return "text-gray-500";
     }
   };
 
   return (
-    <Dialog onOpenChange={() => setIsDialogOpen(true)}>
+    <Dialog onOpenChange={setIsDialogOpen}>
       <DialogTrigger className="flex items-center justify-start">
         {children}
       </DialogTrigger>
@@ -86,31 +125,7 @@ const ProjectDialog = ({
           <div className="flex flex-col gap-2">
             {blockData.length > 0 ? (
               blockData.map((block) => (
-                <div key={block.id}>
-                  {block.type === "image" && block.image?.external?.url ? (
-                    <a
-                      href={block.image.external.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Image
-                        src={block.image.external.url}
-                        alt="Project Image"
-                        width={800} // 원하는 크기로 설정
-                        height={450} // 원하는 크기로 설정
-                        className="rounded-lg"
-                        priority // LCP를 위한 우선 로드
-                      />
-                    </a>
-                  ) : (
-                    block[block.type]?.rich_text?.length > 0 &&
-                    block[block.type].rich_text.map((text, index) => (
-                      <p key={index} className={getTextStyle(block.type)}>
-                        {text.plain_text}
-                      </p>
-                    ))
-                  )}
-                </div>
+                <div key={block.id}>{renderBlockContent(block)}</div>
               ))
             ) : (
               <p>Loading...</p>

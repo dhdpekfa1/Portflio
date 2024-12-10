@@ -58,6 +58,7 @@ const ContactDialog = () => {
                 width={400}
                 height={400}
                 style={{ width: 180, height: "auto", borderRadius: 12 }}
+                priority
               />
             </div>
           </div>
