@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ThemeToggleButton from "../common/theme-toggle-button";
+import { ThemeToggleButton, ContactDialog } from "@/components/common";
 
 const Header = () => {
   const pathname = usePathname();
@@ -21,7 +21,7 @@ const Header = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
-            className="w-10 h-10 text-white p-2 bg-secondary rounded-full"
+            className="w-10 h-10 text-white p-2 bg-second rounded-full"
             viewBox="0 0 24 24"
           >
             <path
@@ -37,9 +37,7 @@ const Header = () => {
           <Link
             href={"/"}
             className={`nev_btn ${
-              pathname === "/"
-                ? "text-gray-800 dark:text-primary font-bold"
-                : ""
+              pathname === "/" ? "text-gray-800 dark:text-point font-bold" : ""
             }`}
           >
             홈
@@ -48,7 +46,7 @@ const Header = () => {
             href={"/projects"}
             className={`nev_btn ${
               pathname === "/projects"
-                ? "text-gray-800 dark:text-primary font-bold"
+                ? "text-gray-800 dark:text-point font-bold"
                 : ""
             }`}
           >
@@ -58,15 +56,15 @@ const Header = () => {
             href={"/about-me"}
             className={`nev_btn ${
               pathname === "/about-me"
-                ? "text-gray-800 dark:text-primary font-bold"
+                ? "text-gray-800 dark:text-point font-bold"
                 : ""
             }`}
           >
-            연락처
+            자기소개
           </Link>
+          <ContactDialog />
+          <ThemeToggleButton />
         </nav>
-
-        <ThemeToggleButton />
       </div>
     </header>
   );

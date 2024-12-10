@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const NOTION_API_BASE_URL = "https://api.notion.com/v1";
-const TOKEN = process.env.NOTION_TOKE;
+const TOKEN = process.env.NOTION_TOKEN;
 const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 const notionClient = axios.create({
@@ -23,6 +23,20 @@ export const getDataList = async () => {
     return res.data.results;
   } catch (err) {
     console.error("Error querying Notion database:", err);
+    return [];
+  }
+};
+
+export const getBlockChildren = async (blockId: string) => {
+  try {
+    const response = await fetch(`/api/notion/${blockId}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error("Error fetching Notion block children:", error);
     return [];
   }
 };

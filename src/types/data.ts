@@ -1,3 +1,4 @@
+// DataList
 export interface NotionPage {
   archived: boolean;
   cover: {
@@ -102,5 +103,79 @@ export interface Properties {
       name: string;
       color: string;
     }>;
+  };
+}
+
+// Data/Block
+export interface Block {
+  id: string;
+  object: "block";
+  type: string;
+  parent: Parent;
+  created_time: string;
+  last_edited_time: string;
+  created_by: {
+    object: "user";
+    id: string;
+  };
+  last_edited_by: {
+    object: "user";
+    id: string;
+  };
+  archived: boolean;
+  has_children: boolean;
+  in_trash: boolean;
+  rich_text?: RichText[];
+  heading_1?: {
+    color: string;
+    is_toggleable: boolean;
+    rich_text: RichText[];
+  };
+  heading_2?: {
+    color: string;
+    is_toggleable: boolean;
+    rich_text: RichText[];
+  };
+  paragraph?: {
+    color: string;
+    rich_text: RichText[];
+  };
+  image?: Image;
+  [key: string]: unknown;
+}
+interface Annotation {
+  bold: boolean;
+  italic: boolean;
+  strikethrough: boolean;
+  underline: boolean;
+  code: boolean;
+  color: string;
+}
+
+interface RichText {
+  annotations: Annotation;
+  href: string | null;
+  plain_text: string;
+  text: {
+    content: string;
+    link: string | null;
+  };
+  type: "text";
+}
+
+interface Parent {
+  type: "page_id";
+  page_id: string;
+}
+
+interface Image {
+  caption: {
+    plain_text: string;
+  }[];
+  external?: {
+    url: string;
+  };
+  file?: {
+    url: string;
   };
 }

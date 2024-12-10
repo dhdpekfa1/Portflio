@@ -23,7 +23,7 @@ const ThemeToggleButton = () => {
   return (
     <div>
       <button
-        className="inline-flex items-center bg-gray-200 dark:bg-slate-600 dark:text-slate-400 border-0 py-1 px-3 focus:outline-none hover:bg-gray-100 hover:dark:bg-slate-700 hover:text-orange-400 dark:hover:text-yellow-300 rounded text-base mt-4 md:mt-0"
+        className="inline-flex items-center bg-gray-200 dark:bg-slate-600 dark:text-slate-400 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 hover:dark:bg-slate-700 hover:text-orange-500 dark:hover:text-yellow-300 rounded text-base mt-4 md:mt-0"
         type="button"
         onClick={onToggleClick}
       >
@@ -65,4 +65,4 @@ const ThemeToggleButton = () => {
   );
 };
 
-export default ThemeToggleButton;
+export { ThemeToggleButton };
