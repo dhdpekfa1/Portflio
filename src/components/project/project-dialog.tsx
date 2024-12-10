@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import {
   Dialog,
@@ -31,20 +31,19 @@ const ProjectDialog = ({
   const [blockData, setBlockData] = useState<Block[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  useEffect(() => {
-    if (isDialogOpen) {
-      fetchData();
-    }
-  }, [isDialogOpen]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const res = await getBlockChildren(pageId);
     if (!res) {
       return;
     }
-    console.log(res);
     setBlockData(res);
-  };
+  }, [pageId]);
+
+  useEffect(() => {
+    if (isDialogOpen) {
+      fetchData();
+    }
+  }, [isDialogOpen, fetchData]);
 
   const renderBlockContent = (block: Block) => {
     switch (block.type) {
