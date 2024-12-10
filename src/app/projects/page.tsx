@@ -11,7 +11,7 @@ const ProjectPage = async () => {
       <h1 className="text-2xl font-bold ml-auto mr-8">
         프로젝트: <span className="text-point">{data.length}</span>개
       </h1>
-      <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:w-full gap-8 m-6 py-10 mb-8">
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:w-full gap-8 m-6 py-10 mb-8 items-center justify-center">
         {data.map((project) => (
           <ProjectItem key={project.id} data={project} />
         ))}

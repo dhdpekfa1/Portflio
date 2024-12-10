@@ -38,7 +38,7 @@ p {
 }
 
 .project_card {
-  @apply m-3 flex flex-col bg-ef dark:bg-slate-800 rounded-xl transition duration-300 transform border border-gray-300 hover:scale-105 hover:shadow-lg dark:hover:shadow-gray-400/20 dark:border-gray-700;
+  @apply flex flex-col items-center justify-center bg-ef dark:bg-slate-800 rounded-xl transition duration-300 transform border border-gray-300 hover:scale-105 hover:shadow-lg dark:hover:shadow-gray-400/20 dark:border-gray-700;
 }
 
 @layer base {
