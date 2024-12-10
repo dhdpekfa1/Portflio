@@ -16,7 +16,7 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
   const endDate = data.properties.WorkPeriod.date?.end;
 
   return (
-    <ProjectDialog pageId={data.id}>
+    <ProjectDialog pageId={data.id} title={title} description={description}>
       <div className="project_card  w-full" key={data.id}>
         <div className="bg-black rounded-t-xl w-full h-[300px] overflow-hidden">
           {coverUrl ? (
@@ -37,7 +37,7 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
           )}
         </div>
         <div className="w-full flex flex-col p-4 gap-2 items-start">
-          <h2 className="font-bold text-3xl truncate w-full max-w-full">
+          <h2 className="font-bold text-3xl truncate w-full max-w-full text-second dark:text-point text-left">
             {title}
           </h2>
           <h3 className="text-xl truncate w-full max-w-full text-left">

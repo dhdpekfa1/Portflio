@@ -18,3 +18,4 @@ export {
   DialogTitle,
   DialogDescription,
 } from "./dialog/dialog";
+export { Separator } from "./separator/separator";

@@ -108,56 +108,60 @@ export interface Properties {
 
 // Data/Block
 export interface Block {
-  object: string;
   id: string;
-  type: "paragraph" | "heading_2";
+  object: "block";
+  type: string;
   parent: Parent;
   created_time: string;
   last_edited_time: string;
-  created_by: User;
-  last_edited_by: User;
-  has_children: boolean;
+  created_by: {
+    object: "user";
+    id: string;
+  };
+  last_edited_by: {
+    object: "user";
+    id: string;
+  };
   archived: boolean;
+  has_children: boolean;
   in_trash: boolean;
-  paragraph?: Paragraph;
-  heading_2?: Heading2;
+  rich_text?: RichText[];
+  heading_1?: {
+    color: string;
+    is_toggleable: boolean;
+    rich_text: RichText[];
+  };
+  heading_2?: {
+    color: string;
+    is_toggleable: boolean;
+    rich_text: RichText[];
+  };
+  paragraph?: {
+    color: string;
+    rich_text: RichText[];
+  };
 }
-
-interface User {
-  object: string;
-  id: string;
+interface Annotation {
+  bold: boolean;
+  italic: boolean;
+  strikethrough: boolean;
+  underline: boolean;
+  code: boolean;
+  color: string;
 }
 
 interface RichText {
-  annotations: {
-    bold: boolean;
-    italic: boolean;
-    strikethrough: boolean;
-    underline: boolean;
-    code: boolean;
-    color: string;
-  };
+  annotations: Annotation;
   href: string | null;
   plain_text: string;
   text: {
     content: string;
     link: string | null;
   };
-  type: string;
-}
-
-interface Paragraph {
-  color: string;
-  rich_text: RichText[];
-}
-
-interface Heading2 {
-  color: string;
-  is_toggleable: boolean;
-  rich_text: RichText[];
+  type: "text";
 }
 
 interface Parent {
-  type: string;
+  type: "page_id";
   page_id: string;
 }
