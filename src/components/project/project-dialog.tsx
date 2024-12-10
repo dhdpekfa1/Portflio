@@ -40,7 +40,6 @@ const ProjectDialog = ({
   const fetchData = async () => {
     const res = await getBlockChildren(pageId);
     if (!res) {
-      console.error("page-dialog :", res);
       return;
     }
     console.log(res);
@@ -73,8 +72,6 @@ const ProjectDialog = ({
       case "heading_1":
       case "heading_2":
       case "heading_3":
-      case "bulleted_list_item":
-      case "numbered_list_item":
         const richText = (
           block[block.type] as { rich_text: { plain_text: string }[] }
         )?.rich_text;
@@ -86,6 +83,20 @@ const ProjectDialog = ({
           ));
         }
         break;
+
+      case "bulleted_list_item":
+      case "numbered_list_item": {
+        const listBlock = block[block.type] as {
+          rich_text: { plain_text: string }[];
+        };
+        return (
+          <li key={block.id}>
+            {listBlock.rich_text.map((text, index) => (
+              <span key={index}>{text.plain_text}</span>
+            ))}
+          </li>
+        );
+      }
       default:
         return null;
     }
