@@ -6,9 +6,9 @@ const NOTION_TOKEN = process.env.NOTION_TOKEN;
 
 export async function GET(
   req: Request,
-  { params }: { params: { blockId: string } }
+  context: { params: { blockId: string } }
 ) {
-  const { blockId } = params;
+  const { blockId } = context.params;
 
   if (!NOTION_TOKEN || !blockId) {
     return NextResponse.json(
@@ -32,10 +32,19 @@ export async function GET(
     );
 
     return NextResponse.json(response.data, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { error: error.response?.data || error.message },
-      { status: error.response?.status || 500 }
-    );
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      return NextResponse.json(
+        { error: error.response?.data || error.message },
+        { status: error.response?.status || 500 }
+      );
+    } else if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    } else {
+      return NextResponse.json(
+        { error: "An unknown error occurred." },
+        { status: 500 }
+      );
+    }
   }
 }
