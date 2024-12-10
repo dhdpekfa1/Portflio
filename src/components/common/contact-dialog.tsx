@@ -13,17 +13,19 @@ const ContactDialog = () => {
   const data = [
     {
       label: "email",
-      contact: "dhdpekfa1@daum.net",
+      info: "dhdpekfa1@daum.net",
+      contact: "mailto:dhdpekfa1@daum.net", // 이메일 클릭 시 이메일 앱 열기
     },
     {
       label: "github",
-      contact: " https://github.com/dhdpekfa1",
+      contact: "https://github.com/dhdpekfa1", // 깃허브 링크
     },
     {
       label: "kakaoTalk",
-      contact: "dhdpekfa",
+      contact: null, // 카카오톡은 클릭 동작 없도록 설정
     },
   ];
+
   return (
     <Dialog>
       <DialogTrigger className="nev_btn text-two dark:text-ef">
@@ -41,14 +43,20 @@ const ContactDialog = () => {
             {data.map((item) => (
               <div key={item.label} className="flex gap-2">
                 <span className="text-gray-600">{item.label}: </span>
-                <a
-                  href={item.contact}
-                  className="text-second dark:text-point hover:scale-105"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {item.contact}
-                </a>
+                {item.contact ? (
+                  <a
+                    href={item.contact}
+                    className="text-second dark:text-point hover:scale-105"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.info || item.contact}
+                  </a>
+                ) : (
+                  <span className="text-second dark:text-point cursor-default">
+                    {item.info || item.label}
+                  </span>
+                )}
               </div>
             ))}
             <div className="flex items-center justify-center">
