@@ -121,7 +121,7 @@ const ProjectDialog = ({
       <DialogTrigger className="flex items-center justify-start">
         {children}
       </DialogTrigger>
-      <DialogContent className="max-h-[80%] max-w-[80%] m-8 bg-ef dark:bg-slate-800 border border-gray-200 overflow-scroll">
+      <DialogContent className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[80%] max-w-[80%] bg-ef dark:bg-slate-800 border border-gray-200 overflow-scroll">
         <DialogHeader>
           <DialogTitle className="mb-2 text-3xl font-bold text-second dark:text-second">
             {title}
