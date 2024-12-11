@@ -31,15 +31,13 @@ const ContactDialog = () => {
       <DialogTrigger className="nev_btn text-two dark:text-ef">
         연락처
       </DialogTrigger>
-      <DialogContent className="max-h-screen w-fit m-8 bg-ef dark:bg-slate-800 border border-gray-200">
+      <DialogContent className="w-fit fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[80%] max-w-[80%] bg-ef dark:bg-slate-800 border border-gray-200 overflow-scroll">
         <CardHeader>
           <DialogTitle className="text-lg font-bold text-second">
             연락처
           </DialogTitle>
           <CardDescription className="pt-1 -pb-2">
-            오늘도 살아가며, 배울 수 있어
-            <br />
-            행복하고 감사합니다 ☘️
+            오늘도 살아가며, 배울 수 있어 감사합니다 ☘️
           </CardDescription>
         </CardHeader>
         <CardContent>

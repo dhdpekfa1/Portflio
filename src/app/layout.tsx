@@ -18,7 +18,25 @@ const notoSans = Noto_Sans({
 
 export const metadata: Metadata = {
   title: "Ollin's Portfolio",
-  description: "Next.js로 만든 포트폴리오",
+  description: "Next.js Project Portfolio",
+  openGraph: {
+    title: "Ollin's Portfolio",
+    description: "Next.js Project Portfolio",
+    images: [
+      {
+        url: "/images/profile_2.png",
+        width: 1200,
+        height: 630,
+        alt: "Ollin's Portfolio Thumbnail",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ollin's Portfolio",
+    description: "Next.js Project Portfolio",
+    images: ["/images/profile_1.png"],
+  },
 };
 
 export default function RootLayout({
