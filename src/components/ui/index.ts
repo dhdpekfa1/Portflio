@@ -19,3 +19,4 @@ export {
   DialogDescription,
 } from "./dialog/dialog";
 export { Separator } from "./separator/separator";
+export { Skeleton } from "./skeleton/skeleton";

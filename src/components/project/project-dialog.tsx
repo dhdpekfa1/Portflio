@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogDescription,
   Separator,
+  Skeleton,
 } from "@/components/ui";
 import { getBlockChildren } from "@/apis/data";
 import { Block } from "@/types/data";
@@ -138,7 +139,13 @@ const ProjectDialog = ({
                 <div key={block.id}>{renderBlockContent(block)}</div>
               ))
             ) : (
-              <p>Loading...</p>
+              <div className="flex flex-col gap-2">
+                <Skeleton className="h-10 w-1/3" />
+                <Skeleton className="h-[300px] w-full" />
+                <Skeleton className="h-5 w-1/3" />
+                <Skeleton className="h-5 w-2/3" />
+                <Skeleton className="h-5 w-1/2" />
+              </div>
             )}
           </div>
         </CardContent>

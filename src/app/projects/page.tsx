@@ -12,7 +12,7 @@ const ProjectPage = async () => {
         프로젝트: <span className="text-point">{data.length}</span>개
       </h1>
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:w-full gap-8 m-6 py-10 mb-8 items-center justify-center">
-        {data.map((project) => (
+        {data.reverse().map((project) => (
           <ProjectItem key={project.id} data={project} />
         ))}
       </div>
