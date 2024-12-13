@@ -3,9 +3,9 @@ import {
   DialogTrigger,
   DialogContent,
   DialogTitle,
-  CardDescription,
   CardContent,
   CardHeader,
+  DialogDescription,
 } from "@/components/ui";
 import Image from "next/image";
 
@@ -36,9 +36,9 @@ const ContactDialog = () => {
           <DialogTitle className="text-lg font-bold text-second">
             연락처
           </DialogTitle>
-          <CardDescription className="pt-1 -pb-2 text-sm">
+          <DialogDescription className="pt-1">
             오늘도 살아가며, 배울 수 있어 감사합니다 ☘️
-          </CardDescription>
+          </DialogDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-2">
