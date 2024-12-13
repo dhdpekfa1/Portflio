@@ -37,7 +37,7 @@ const Header = () => {
           <Link
             href={"/"}
             className={`nev_btn ${
-              pathname === "/" ? "text-gray-800 dark:text-point font-bold" : ""
+              pathname === "/" ? "text-second dark:text-point font-bold" : ""
             }`}
           >
             홈
@@ -46,7 +46,7 @@ const Header = () => {
             href={"/projects"}
             className={`nev_btn ${
               pathname === "/projects"
-                ? "text-gray-800 dark:text-point font-bold"
+                ? "text-second dark:text-point font-bold"
                 : ""
             }`}
           >
@@ -56,7 +56,7 @@ const Header = () => {
             href={"/about-me"}
             className={`nev_btn ${
               pathname === "/about-me"
-                ? "text-gray-800 dark:text-point font-bold"
+                ? "text-second dark:text-point font-bold"
                 : ""
             }`}
           >
