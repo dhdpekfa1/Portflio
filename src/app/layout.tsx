@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description: "Next.js Project Portfolio",
     images: [
       {
-        url: "/images/profile_2.png",
+        url: "/images/profile_1.png",
         width: 1200,
         height: 630,
         alt: "Ollin's Portfolio Thumbnail",
