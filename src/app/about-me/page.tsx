@@ -1,11 +1,5 @@
-import RandomPhrases from "@/components/about-me/RandomPhrases";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui";
+import { RandomPhrases, MoreButton } from "@/components/about-me";
 
 const AboutMe = () => {
   return (
@@ -18,7 +12,7 @@ const AboutMe = () => {
             운동 선수로서의 열정을 개발자로서의 새로운 도전에 쏟아붓고 있는
             오예닮입니다.
           </CardTitle>
-          <CardDescription></CardDescription>
+          {/* <CardDescription></CardDescription> */}
         </CardHeader>
         <CardContent className="flex flex-col gap-4 text-xl font-semibold">
           <span>
@@ -70,6 +64,7 @@ const AboutMe = () => {
           </span>
         </CardContent>
       </Card>
+      <MoreButton />
     </div>
   );
 };
