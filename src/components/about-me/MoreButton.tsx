@@ -5,7 +5,7 @@ const MoreButton = () => {
     <div className="flex items-center justify-end w-[85%] gap-2">
       <p>아직 궁금하다면?</p>
       <Link
-        href="/about-me?detail=true"
+        href="/about-me/detail"
         className="underline cursor-pointer"
         typeof="button"
       >
