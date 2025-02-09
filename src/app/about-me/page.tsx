@@ -1,12 +1,12 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui';
-import { RandomPhrases, MoreButton } from '@/components/about-me';
+import { RandomPhrases } from '@/components/about-me';
 
 const AboutMe = () => {
   return (
     <div className='flex flex-col items-center justify-center h-screen'>
       <RandomPhrases />
 
-      <Card className='w-[85%] h-[80%] m-8 bg-ef dark:bg-slate-800 border border-gray-200 overflow-scroll'>
+      <Card className='w-[85%] h-[80%] m-8 bg-zinc-100 dark:bg-zinc-800 border border-gray-200/20 overflow-scroll'>
         <CardHeader>
           <CardTitle className='text-lg md:text-lg lg:text-xl font-bold'>
             운동 선수로서의 열정을 개발자로서의 새로운 도전에 쏟아붓고 있는
@@ -75,7 +75,7 @@ const AboutMe = () => {
           </span>
         </CardContent>
       </Card>
-      <MoreButton />
+      {/* <MoreButton /> */}
     </div>
   );
 };
