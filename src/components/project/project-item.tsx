@@ -1,35 +1,35 @@
-import Link from "next/link";
-import Image from "next/image";
-import { NotionPage } from "@/types/data";
-import { ProjectAnimationLottie } from "@/components/animation";
-import { calculatePeriod } from "@/utils/helper";
-import ProjectDialog from "./project-dialog";
+import Link from 'next/link';
+import Image from 'next/image';
+import { NotionPage } from '@/types/data';
+import { ProjectAnimationLottie } from '@/components/animation';
+import { calculatePeriod } from '@/utils/helper';
+import ProjectDialog from './project-dialog';
 
 const ProjectItem = async ({ data }: { data: NotionPage }) => {
-  const title = data.properties.Name.title?.[0]?.plain_text || "Untitled";
-  const coverUrl = data.cover?.file?.url || data.cover?.external?.url || "";
-  const githubUrl = data.properties.Github?.url || "#";
+  const title = data.properties.Name.title?.[0]?.plain_text || 'Untitled';
+  const coverUrl = data.cover?.file?.url || data.cover?.external?.url || '';
+  const githubUrl = data.properties.Github?.url || '#';
   const description =
-    data.properties.Description.rich_text?.[0]?.plain_text || "No description";
+    data.properties.Description.rich_text?.[0]?.plain_text || 'No description';
   const tags = data.properties.tags.multi_select;
   const startDate = data.properties.WorkPeriod.date?.start;
   const endDate = data.properties.WorkPeriod.date?.end;
 
   return (
     <ProjectDialog pageId={data.id} title={title} description={description}>
-      <div className="project_card w-full" key={data.id}>
-        <div className="bg-black rounded-t-xl w-full h-[300px] overflow-hidden">
+      <div className='project_card w-full' key={data.id}>
+        <div className='bg-black rounded-t-xl w-full md:h-[300px] overflow-hidden'>
           {coverUrl ? (
             <Image
               src={coverUrl}
-              alt="project img"
+              alt='project img'
               width={1600}
               height={900}
               quality={100}
-              className="rounded-t-xl object-cover"
+              className='rounded-t-xl object-cover'
               style={{
-                width: "100%",
-                height: "auto",
+                width: '100%',
+                height: 'auto',
               }}
               priority
             />
@@ -37,30 +37,30 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
             <ProjectAnimationLottie />
           )}
         </div>
-        <div className="w-full flex flex-col p-4 gap-2 items-start">
-          <h2 className="font-bold text-3xl truncate w-full max-w-full text-second dark:text-point text-left">
+        <div className='w-full flex flex-col p-4 gap-2 items-start'>
+          <h2 className='font-bold text-2xl md:text-3xl truncate w-full max-w-full text-second dark:text-point text-left'>
             {title}
           </h2>
-          <h3 className="text-xl truncate w-full max-w-full text-left">
+          <h3 className='text-base md:text-xl truncate w-full max-w-full text-left text-gray-500'>
             {description}
           </h3>
           <Link
             href={githubUrl}
-            className="w-fit text-gray-800 dark:text-gray-300 hover:text-second dark:hover:text-point hover:scale-105"
+            className='text-base md:text-lg text-gray-800 dark:text-gray-300 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105'
           >
             github 바로가기
           </Link>
-          <span className="font-medium text-sm flex items-start gap-2 text-gray-500 dark:text-gray-500 truncate w-full max-w-full">
+          <span className='text-sm md:text-base font-medium flex items-start gap-2 text-gray-500 dark:text-gray-500 truncate w-full max-w-full'>
             작업 기간: {startDate} ~ {endDate} (
             {calculatePeriod(startDate, endDate)}일)
           </span>
-          <div className="max-w-full flex flex-nowrap items-start mt-2 gap-2 overflow-x-scroll whitespace-nowrap">
+          <div className='max-w-full flex flex-nowrap items-start mt-2 gap-2 overflow-x-scroll whitespace-nowrap'>
             {tags.map((tag) => (
               <div
                 key={tag.id}
-                className="bg-second rounded-lg px-2 py-1 flex-shrink-0"
+                className='bg-second rounded-lg px-2 py-1 flex-shrink-0'
               >
-                <p className="text-xs text-white">{tag.name}</p>
+                <p className='text-xs text-white'>{tag.name}</p>
               </div>
             ))}
           </div>

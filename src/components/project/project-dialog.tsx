@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { ReactNode, useCallback, useEffect, useState } from "react";
-import Image from "next/image";
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
 import {
   Dialog,
   DialogTrigger,
@@ -12,9 +12,9 @@ import {
   DialogDescription,
   Separator,
   Skeleton,
-} from "@/components/ui";
-import { getBlockChildren } from "@/apis/data";
-import { Block } from "@/types/data";
+} from '@/components/ui';
+import { getBlockChildren } from '@/apis/data';
+import { Block } from '@/types/data';
 
 interface ProjectDialogProps {
   children: ReactNode;
@@ -48,30 +48,30 @@ const ProjectDialog = ({
 
   const renderBlockContent = (block: Block) => {
     switch (block.type) {
-      case "image":
+      case 'image':
         if (block.image?.external?.url) {
           return (
             <a
               href={block.image.external.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
             >
               <Image
                 src={block.image.external.url}
-                alt="Project Image"
+                alt='Project Image'
                 width={800}
                 height={450}
-                className="rounded-lg"
+                className='rounded-lg'
                 priority
               />
             </a>
           );
         }
         break;
-      case "paragraph":
-      case "heading_1":
-      case "heading_2":
-      case "heading_3":
+      case 'paragraph':
+      case 'heading_1':
+      case 'heading_2':
+      case 'heading_3':
         const richText = (
           block[block.type] as { rich_text: { plain_text: string }[] }
         )?.rich_text;
@@ -84,8 +84,8 @@ const ProjectDialog = ({
         }
         break;
 
-      case "bulleted_list_item":
-      case "numbered_list_item": {
+      case 'bulleted_list_item':
+      case 'numbered_list_item': {
         const listBlock = block[block.type] as {
           rich_text: { plain_text: string }[];
         };
@@ -104,47 +104,47 @@ const ProjectDialog = ({
 
   const getTextStyle = (type: string) => {
     switch (type) {
-      case "heading_1":
-        return "text-3xl font-bold mt-6 mb-2";
-      case "heading_2":
-        return "text-2xl font-semibold mt-6 mb-2";
-      case "heading_3":
-        return "text-xl font-medium mt-4 mb-2";
-      case "paragraph":
-        return "text-base";
+      case 'heading_1':
+        return 'text-3xl font-bold mt-6 mb-2';
+      case 'heading_2':
+        return 'text-2xl font-semibold mt-6 mb-2';
+      case 'heading_3':
+        return 'text-xl font-medium mt-4 mb-2';
+      case 'paragraph':
+        return 'text-base';
       default:
-        return "text-gray-500";
+        return 'text-gray-500';
     }
   };
 
   return (
     <Dialog onOpenChange={setIsDialogOpen}>
-      <DialogTrigger className="flex items-center justify-start">
+      <DialogTrigger className='flex items-center justify-start'>
         {children}
       </DialogTrigger>
-      <DialogContent className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[80%] max-w-[80%] bg-ef dark:bg-slate-800 border border-gray-200 overflow-scroll">
+      <DialogContent className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[80%] max-w-[80%] bg-ef dark:bg-zinc-800 border border-gray-200/20 overflow-scroll'>
         <DialogHeader>
-          <DialogTitle className="mb-2 text-3xl font-bold text-second dark:text-second">
+          <DialogTitle className='mb-2 text-3xl font-bold text-second dark:text-second'>
             {title}
           </DialogTitle>
-          <DialogDescription className="text-gray-500 dark:text-gray-400 -mt-6">
+          <DialogDescription className='text-gray-500 dark:text-gray-400 -mt-6'>
             {description}
           </DialogDescription>
-          <Separator className="bg-dd dark:bg-gray-600" />
+          <Separator className='bg-dd dark:bg-gray-600' />
         </DialogHeader>
         <CardContent>
-          <div className="flex flex-col gap-2">
+          <div className='flex flex-col gap-2'>
             {blockData.length > 0 ? (
               blockData.map((block) => (
                 <div key={block.id}>{renderBlockContent(block)}</div>
               ))
             ) : (
-              <div className="flex flex-col gap-2">
-                <Skeleton className="h-10 w-1/3" />
-                <Skeleton className="h-[300px] w-full" />
-                <Skeleton className="h-5 w-1/3" />
-                <Skeleton className="h-5 w-2/3" />
-                <Skeleton className="h-5 w-1/2" />
+              <div className='flex flex-col gap-2'>
+                <Skeleton className='h-10 w-1/3' />
+                <Skeleton className='h-[300px] w-full' />
+                <Skeleton className='h-5 w-1/3' />
+                <Skeleton className='h-5 w-2/3' />
+                <Skeleton className='h-5 w-1/2' />
               </div>
             )}
           </div>
