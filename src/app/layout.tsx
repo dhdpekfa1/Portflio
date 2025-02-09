@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description: 'Next.js Project Portfolio',
     images: [
       {
-        url: '/images/profile_1.png',
+        url: '/images/profile_2.png',
         width: 1200,
         height: 630,
         alt: "Ollin's Portfolio Thumbnail",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Ollin's Portfolio",
     description: 'Next.js Project Portfolio',
-    images: ['/images/profile_1.png'],
+    images: ['/images/profile_2.png'],
   },
 };
 
@@ -47,7 +47,6 @@ export default function RootLayout({
   return (
     <html lang='ko' suppressHydrationWarning>
       <head>
-        {/* 파비콘 설정 */}
         <link rel='icon' href='/images/favicon.ico' />
       </head>
       <body className={`${roboto.variable} ${notoSans.variable}`}>

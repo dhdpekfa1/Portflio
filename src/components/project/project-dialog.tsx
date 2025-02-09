@@ -105,13 +105,13 @@ const ProjectDialog = ({
   const getTextStyle = (type: string) => {
     switch (type) {
       case 'heading_1':
-        return 'text-3xl font-bold mt-6 mb-2';
+        return 'text-xl md:text-3xl font-bold mt-6 mb-2';
       case 'heading_2':
-        return 'text-2xl font-semibold mt-6 mb-2';
+        return 'text-xl md:text-2xl font-semibold mt-6 mb-2';
       case 'heading_3':
-        return 'text-xl font-medium mt-4 mb-2';
+        return 'text-lg md:text-xl font-medium mt-4 mb-2';
       case 'paragraph':
-        return 'text-base';
+        return 'text-sm md:text-base';
       default:
         return 'text-gray-500';
     }
@@ -122,12 +122,12 @@ const ProjectDialog = ({
       <DialogTrigger className='flex items-center justify-start'>
         {children}
       </DialogTrigger>
-      <DialogContent className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[80%] max-w-[80%] bg-ef dark:bg-zinc-800 border border-gray-200/20 overflow-scroll'>
+      <DialogContent className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[80%] max-w-[95%] md:max-w-[80%] bg-ef dark:bg-zinc-800 border border-gray-200/20 overflow-scroll rounded-sm'>
         <DialogHeader>
-          <DialogTitle className='mb-2 text-3xl font-bold text-second dark:text-second'>
+          <DialogTitle className='mb-2 text-2xl md:text-3xl font-bold text-second dark:text-second'>
             {title}
           </DialogTitle>
-          <DialogDescription className='text-gray-500 dark:text-gray-400 -mt-6'>
+          <DialogDescription className='text-gray-500 dark:text-gray-400 -mt-6 text-sm md:text-base'>
             {description}
           </DialogDescription>
           <Separator className='bg-dd dark:bg-gray-600' />

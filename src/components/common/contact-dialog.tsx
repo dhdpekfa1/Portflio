@@ -31,24 +31,26 @@ const ContactDialog = () => {
       <DialogTrigger className='nev_btn text-two dark:text-ef'>
         연락처
       </DialogTrigger>
-      <DialogContent className='w-fit items-center fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[80%] max-w-[80%] bg-ef dark:bg-zinc-800 border border-gray-200/20 overflow-scroll'>
+      <DialogContent className='flex flex-col items-center fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[80%] max-w-[95%] md:max-w-fit bg-ef dark:bg-zinc-800 border border-gray-200/20 rounded-sm'>
         <CardHeader>
-          <DialogTitle className='text-lg font-bold text-second'>
+          <DialogTitle className='font-bold text-second text-base md:text-xl'>
             연락처
           </DialogTitle>
-          <DialogDescription className='pt-1'>
-            오늘도 살아가며, 배울 수 있어 감사합니다 ☘️
+          <DialogDescription className='pt-1 text-xs md:text-lg break-keep dark:text-gray-400'>
+            감사하는 마음으로 배우고, 배운 만큼 성장합니다. ☘️
           </DialogDescription>
         </CardHeader>
         <CardContent>
           <div className='flex flex-col gap-2'>
             {data.map((item) => (
               <div key={item.label} className='flex gap-2'>
-                <span className='text-gray-500'>{item.label}: </span>
+                <span className='text-gray-500 text-sm md:text-lg'>
+                  {item.label}:{' '}
+                </span>
                 {item.contact ? (
                   <a
                     href={item.contact}
-                    className='text-second dark:text-point hover:scale-105'
+                    className='text-second dark:text-point hover:scale-105  text-sm md:text-lg'
                     target='_blank'
                     rel='noopener noreferrer'
                   >
@@ -67,7 +69,7 @@ const ContactDialog = () => {
                 alt='Kakao QR Code'
                 width={400}
                 height={400}
-                style={{ width: 180, height: 'auto', borderRadius: 12 }}
+                className='w-[120px] md:w-[160px] h-auto rounded-xl mt-2'
                 priority
               />
             </div>
