@@ -8,12 +8,12 @@ const AboutMe = () => {
 
       <Card className='w-[85%] h-[80%] m-8 bg-ef dark:bg-slate-800 border border-gray-200 overflow-scroll'>
         <CardHeader>
-          <CardTitle className='text-xl font-bold'>
+          <CardTitle className='text-lg md:text-lg lg:text-xl font-bold'>
             운동 선수로서의 열정을 개발자로서의 새로운 도전에 쏟아붓고 있는
             오예닮입니다.
           </CardTitle>
         </CardHeader>
-        <CardContent className='flex flex-col gap-4 text-xl font-semibold'>
+        <CardContent className='flex flex-col gap-4 text-base md:text-lg lg:text-xl'>
           <span>
             저는 초등학교 시절부터 2023년까지 핸드볼 선수로 활동하며, U-18
             대표팀 주장을 포함해 고참일 때마다 팀을 이끌었습니다. 신체적으로
