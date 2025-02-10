@@ -16,7 +16,12 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
   const endDate = data.properties.WorkPeriod.date?.end;
 
   return (
-    <ProjectDialog pageId={data.id} title={title} description={description}>
+    <ProjectDialog
+      pageId={data.id}
+      title={title}
+      description={description}
+      githubUrl={githubUrl}
+    >
       <div className='project_card w-full' key={data.id}>
         <div className='bg-black rounded-t-xl w-full md:h-[300px] overflow-hidden'>
           {coverUrl ? (
