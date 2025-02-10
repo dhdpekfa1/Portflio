@@ -14,13 +14,20 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
   const tags = data.properties.tags.multi_select;
   const startDate = data.properties.WorkPeriod.date?.start;
   const endDate = data.properties.WorkPeriod.date?.end;
+  const deployment = data.properties.deploymentURL.url;
+  const preview = data.properties.preview.url
+    ? data.properties.preview.url
+    : null;
 
+  console.log(data.properties.deploymentURL.url);
   return (
     <ProjectDialog
       pageId={data.id}
       title={title}
       description={description}
       githubUrl={githubUrl}
+      deployment={deployment}
+      preview={preview ? preview : ''}
     >
       <div className='project_card w-full' key={data.id}>
         <div className='bg-black rounded-t-xl w-full md:h-[300px] overflow-hidden'>
@@ -50,13 +57,28 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
             {description}
           </h3>
           <Link
+            href={deployment}
+            className='text-base md:text-lg text-gray-800 dark:text-gray-300 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105'
+          >
+            배포 링크
+          </Link>
+          <Link
             href={githubUrl}
             className='text-base md:text-lg text-gray-800 dark:text-gray-300 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105'
           >
             github 바로가기
           </Link>
-          <span className='text-sm md:text-base font-medium flex items-start gap-2 text-gray-500 dark:text-gray-500 truncate w-full max-w-full'>
-            작업 기간: {startDate} ~ {endDate} (
+          <Link
+            href={preview ? preview : ''}
+            className={`text-base md:text-lg text-gray-800 dark:text-gray-300 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105 ${
+              !preview ? 'invisible' : ''
+            }`}
+          >
+            시연 영상
+          </Link>
+
+          <span className='text-sm md:text-base font-medium flex items-start gap-2 text-gray-500 dark:text-gray-500 truncate w-full max-w-full overflow-x-scroll'>
+            작업 기간: {startDate} ~ {endDate}(
             {calculatePeriod(startDate, endDate)}일)
           </span>
           <div className='max-w-full flex flex-nowrap items-start mt-2 gap-2 overflow-x-scroll whitespace-nowrap'>

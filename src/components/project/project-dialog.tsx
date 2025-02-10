@@ -23,6 +23,8 @@ interface ProjectDialogProps {
   title: string;
   description: string;
   githubUrl: string;
+  deployment: string;
+  preview: string;
 }
 
 const ProjectDialog = ({
@@ -31,6 +33,8 @@ const ProjectDialog = ({
   title,
   description,
   githubUrl,
+  deployment,
+  preview,
 }: ProjectDialogProps) => {
   const [blockData, setBlockData] = useState<Block[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -132,12 +136,28 @@ const ProjectDialog = ({
           </DialogTitle>
           <DialogDescription className='flex flex-col text-gray-500 dark:text-gray-400 -mt-6 text-sm md:text-base'>
             {description}
-            <Link
-              href={githubUrl}
-              className='text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point'
-            >
-              👉🏻 github 바로가기
-            </Link>
+            <div className='flex gap-4 overflow-x-scroll items-center justify-center md:justify-start mt-2'>
+              <Link
+                href={githubUrl}
+                className='text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point'
+              >
+                👉🏻 github
+              </Link>
+              <Link
+                href={deployment}
+                className='text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point'
+              >
+                👉🏻 배포 주소
+              </Link>
+              <Link
+                href={preview ? preview : ''}
+                className={`text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point ${
+                  !preview ? 'hidden' : ''
+                }`}
+              >
+                👉🏻 시연 영상
+              </Link>
+            </div>
           </DialogDescription>
           <Separator className='bg-dd dark:bg-gray-600' />
         </DialogHeader>
