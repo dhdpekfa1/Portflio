@@ -36,7 +36,7 @@ export interface NotionPage {
 export interface Properties {
   Description: {
     id: string;
-    type: "rich_text";
+    type: 'rich_text';
     rich_text: Array<{
       type: string;
       text: {
@@ -57,12 +57,12 @@ export interface Properties {
   };
   Github: {
     id: string;
-    type: "url";
+    type: 'url';
     url: string;
   };
   Name: {
     id: string;
-    type: "title";
+    type: 'title';
     title: Array<{
       type: string;
       text: {
@@ -83,12 +83,12 @@ export interface Properties {
   };
   Playstore: {
     id: string;
-    type: "url";
+    type: 'url';
     url: string;
   };
   WorkPeriod: {
     id: string;
-    type: "date";
+    type: 'date';
     date: {
       start: string;
       end: string;
@@ -97,29 +97,39 @@ export interface Properties {
   };
   tags: {
     id: string;
-    type: "multi_select";
+    type: 'multi_select';
     multi_select: Array<{
       id: string;
       name: string;
       color: string;
     }>;
   };
+  deploymentURL: {
+    id: string;
+    type: string;
+    url: string;
+  };
+  preview: {
+    id: string;
+    type: string;
+    url?: string;
+  };
 }
 
 // Data/Block
 export interface Block {
   id: string;
-  object: "block";
+  object: 'block';
   type: string;
   parent: Parent;
   created_time: string;
   last_edited_time: string;
   created_by: {
-    object: "user";
+    object: 'user';
     id: string;
   };
   last_edited_by: {
-    object: "user";
+    object: 'user';
     id: string;
   };
   archived: boolean;
@@ -160,11 +170,11 @@ interface RichText {
     content: string;
     link: string | null;
   };
-  type: "text";
+  type: 'text';
 }
 
 interface Parent {
-  type: "page_id";
+  type: 'page_id';
   page_id: string;
 }
 
