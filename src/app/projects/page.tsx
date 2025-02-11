@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectItem from '@/components/project/project-item';
+import { ProjectItem } from '@/components/project';
 import { getDataList } from '@/apis/data';
 import { NotionPage } from '@/types/data';
 

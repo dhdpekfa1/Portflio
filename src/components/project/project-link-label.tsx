@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-interface LinkItemProps {
+interface LinkLabelProps {
   label: string;
   url: string;
   hidden?: boolean;
@@ -12,7 +12,7 @@ interface LinkItemProps {
 }
 
 // 포트폴리오 링크 클릭 제어
-const LinkItem = ({ label, url, hidden, className, use }: LinkItemProps) => {
+const LinkLabel = ({ label, url, hidden, className, use }: LinkLabelProps) => {
   const handleLinkClick = (event: React.MouseEvent) => {
     if (url.includes('ollin-portflio')) {
       event.preventDefault();
@@ -38,4 +38,4 @@ const LinkItem = ({ label, url, hidden, className, use }: LinkItemProps) => {
   );
 };
 
-export { LinkItem };
+export { LinkLabel };
