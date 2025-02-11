@@ -16,6 +16,7 @@ import {
 } from '@/components/ui';
 import { getBlockChildren } from '@/apis/data';
 import { Block } from '@/types/data';
+import { renderRichText, renderListItem } from '@/utils/render';
 
 interface ProjectDialogProps {
   children: ReactNode;
@@ -43,10 +44,9 @@ const ProjectDialog = ({
 
   const fetchData = useCallback(async () => {
     const res = await getBlockChildren(pageId);
-    if (!res) {
-      return;
+    if (res) {
+      setBlockData(res);
     }
-    setBlockData(res);
   }, [pageId]);
 
   useEffect(() => {
@@ -58,73 +58,43 @@ const ProjectDialog = ({
   const renderBlockContent = (block: Block) => {
     switch (block.type) {
       case 'image':
-        if (block.image?.external?.url) {
-          return (
-            <a
-              href={block.image.external.url}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <Image
-                src={block.image.external.url}
-                alt='Project Image'
-                width={800}
-                height={450}
-                className='rounded-lg'
-                priority
-              />
-            </a>
-          );
-        }
-        break;
+        console.log('ㅇㅇㅇ', block.image);
+        return block.image?.external?.url ? (
+          <a
+            href={block.image.external.url}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <Image
+              src={block.image.external.url}
+              alt='Project Image'
+              width={800}
+              height={450}
+              className='rounded-lg'
+              priority
+            />
+          </a>
+        ) : null;
+
       case 'paragraph':
       case 'heading_1':
       case 'heading_2':
       case 'heading_3':
-        const richText = (
-          block[block.type] as { rich_text: { plain_text: string }[] }
-        )?.rich_text;
-        if (richText?.length > 0) {
-          return richText.map((text, index) => (
-            <p key={index} className={getTextStyle(block.type)}>
-              {text.plain_text}
-            </p>
-          ));
-        }
-        break;
+        return renderRichText(block, block.type);
 
       case 'bulleted_list_item':
-      case 'numbered_list_item': {
-        const listBlock = block[block.type] as {
-          rich_text: { plain_text: string }[];
-        };
-        return (
-          <li key={block.id}>
-            {listBlock.rich_text.map((text, index) => (
-              <span key={index}>{text.plain_text}</span>
-            ))}
-          </li>
-        );
-      }
+      case 'numbered_list_item':
+        return renderListItem(block);
       default:
         return null;
     }
   };
 
-  const getTextStyle = (type: string) => {
-    switch (type) {
-      case 'heading_1':
-        return 'text-xl md:text-3xl font-bold mt-6 mb-2';
-      case 'heading_2':
-        return 'text-xl md:text-2xl font-semibold mt-6 mb-2';
-      case 'heading_3':
-        return 'text-lg md:text-xl font-medium mt-4 mb-2';
-      case 'paragraph':
-        return 'text-sm md:text-base';
-      default:
-        return 'text-gray-500';
-    }
-  };
+  const links = [
+    { label: 'GitHub', url: githubUrl },
+    { label: '배포 주소', url: deployment },
+    { label: '시연 영상', url: preview, hidden: !preview },
+  ];
 
   return (
     <Dialog onOpenChange={setIsDialogOpen}>
@@ -141,28 +111,19 @@ const ProjectDialog = ({
           </DialogTitle>
           <DialogDescription className='flex flex-col text-gray-500 dark:text-gray-400 -mt-6 text-sm md:text-base'>
             {description}
-            <div className='flex gap-4 overflow-x-scroll items-center justify-center md:justify-start mt-2'>
-              <Link
-                href={githubUrl}
-                className='text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point'
-              >
-                👉🏻 github
-              </Link>
-              <Link
-                href={deployment}
-                className='text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point'
-              >
-                👉🏻 배포 주소
-              </Link>
-              <Link
-                href={preview ? preview : ''}
-                className={`text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point ${
-                  !preview ? 'hidden' : ''
-                }`}
-              >
-                👉🏻 시연 영상
-              </Link>
-            </div>
+            <span className='flex gap-4 overflow-x-scroll items-center justify-center md:justify-start mt-2'>
+              {links.map(({ label, url, hidden }) =>
+                !hidden ? (
+                  <Link
+                    key={label}
+                    href={url}
+                    className='text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point'
+                  >
+                    👉🏻 {label}
+                  </Link>
+                ) : null
+              )}
+            </span>
           </DialogDescription>
           <Separator className='bg-dd dark:bg-gray-600' />
         </DialogHeader>
