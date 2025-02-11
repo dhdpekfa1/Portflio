@@ -2,7 +2,6 @@
 
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   Dialog,
   DialogTrigger,
@@ -17,6 +16,7 @@ import {
 import { getBlockChildren } from '@/apis/data';
 import { Block } from '@/types/data';
 import { renderRichText, renderListItem } from '@/utils/render';
+import { LinkItem } from './ProjectLickItem';
 
 interface ProjectDialogProps {
   children: ReactNode;
@@ -85,12 +85,6 @@ const ProjectDialog = ({
     }
   };
 
-  const handleLinkClick = (url: string, event: React.MouseEvent) => {
-    if (url.includes('ollin-portflio')) {
-      event.preventDefault();
-    }
-  };
-
   return (
     <Dialog onOpenChange={setIsDialogOpen}>
       <DialogTrigger className='flex items-center justify-start'>
@@ -107,20 +101,16 @@ const ProjectDialog = ({
           <DialogDescription className='flex flex-col text-gray-500 dark:text-gray-400 text-sm md:text-base'>
             {description}
             <span className='flex gap-4 overflow-x-scroll items-center justify-center md:justify-start md:mt-1'>
-              {links.map(({ label, url, hidden }) =>
-                !hidden ? (
-                  <Link
-                    key={label}
-                    href={url}
-                    onClick={(e) => handleLinkClick(url, e)}
-                    className='text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point'
-                  >
-                    {url.includes('ollin-portflio')
-                      ? '현재 주소'
-                      : `👉🏻 ${label}`}
-                  </Link>
-                ) : null
-              )}
+              {links.map((link) => (
+                <LinkItem
+                  key={link.label}
+                  label={link.label}
+                  url={link.url}
+                  hidden={link.hidden}
+                  use={'dialog'}
+                  className={`text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point`}
+                />
+              ))}
             </span>
           </DialogDescription>
           <Separator className='bg-dd dark:bg-gray-600' />

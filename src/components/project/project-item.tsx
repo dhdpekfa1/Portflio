@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { NotionPage } from '@/types/data';
 import { ProjectAnimationLottie } from '@/components/animation';
 import { calculatePeriod } from '@/utils/helper';
 import ProjectDialog from './project-dialog';
+import { LinkItem } from './ProjectLickItem';
 
 const ProjectItem = async ({ data }: { data: NotionPage }) => {
   const title = data.properties.Name.title?.[0]?.plain_text || 'Untitled';
@@ -65,19 +65,16 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
             <span>구성: </span>
             {composition}
           </h3>
-          {links.map((link, index) => {
-            return (
-              <Link
-                key={index}
-                href={link.hidden || !link.url ? '' : link.url}
-                className={`text-base md:text-lg text-zinc-600 dark:text-zinc-400 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105 ${
-                  link.hidden ? 'invisible' : ''
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {links.map((link) => (
+            <LinkItem
+              key={link.label}
+              label={link.label}
+              url={link.url}
+              className={`text-base md:text-lg text-zinc-600 dark:text-zinc-400 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105`}
+              hidden={link.hidden}
+              use={'item'}
+            />
+          ))}
 
           <span className='text-sm md:text-base font-medium flex items-start gap-2 text-zinc-500 dark:text-zinc-500 truncate w-full max-w-full overflow-x-scroll'>
             작업 기간: {startDate} ~ {endDate}(
