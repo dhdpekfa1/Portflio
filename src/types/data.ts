@@ -114,6 +114,14 @@ export interface Properties {
     type: string;
     url?: string;
   };
+  composition: {
+    id: string;
+    type: string;
+    rich_text: {
+      type: string;
+      plain_text: string;
+    }[];
+  };
 }
 
 // Data/Block

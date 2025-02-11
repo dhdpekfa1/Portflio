@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { NotionPage } from '@/types/data';
 import { ProjectAnimationLottie } from '@/components/animation';
 import { calculatePeriod } from '@/utils/helper';
 import ProjectDialog from './project-dialog';
+import { LinkItem } from './ProjectLickItem';
 
 const ProjectItem = async ({ data }: { data: NotionPage }) => {
   const title = data.properties.Name.title?.[0]?.plain_text || 'Untitled';
@@ -18,16 +18,21 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
   const preview = data.properties.preview.url
     ? data.properties.preview.url
     : null;
+  const composition = data.properties.composition.rich_text[0].plain_text;
 
-  console.log(data.properties.deploymentURL.url);
+  const links = [
+    { label: 'GitHub', url: githubUrl },
+    { label: '배포 주소', url: deployment },
+    { label: '시연 영상', url: preview || '', hidden: !preview },
+  ];
+
   return (
     <ProjectDialog
       pageId={data.id}
       title={title}
       description={description}
-      githubUrl={githubUrl}
-      deployment={deployment}
-      preview={preview ? preview : ''}
+      composition={composition}
+      links={links}
     >
       <div className='project_card w-full' key={data.id}>
         <div className='bg-black rounded-t-xl w-full md:h-[300px] overflow-hidden'>
@@ -53,31 +58,25 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
           <h2 className='font-bold text-2xl md:text-3xl truncate w-full max-w-full text-second dark:text-point text-left'>
             {title}
           </h2>
-          <h3 className='text-base md:text-xl truncate w-full max-w-full text-left text-gray-500'>
+          <h3 className='text-base md:text-xl truncate w-full max-w-full text-left text-zinc-500'>
             {description}
           </h3>
-          <Link
-            href={deployment}
-            className='text-base md:text-lg text-gray-800 dark:text-gray-300 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105'
-          >
-            배포 링크
-          </Link>
-          <Link
-            href={githubUrl}
-            className='text-base md:text-lg text-gray-800 dark:text-gray-300 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105'
-          >
-            github 바로가기
-          </Link>
-          <Link
-            href={preview ? preview : ''}
-            className={`text-base md:text-lg text-gray-800 dark:text-gray-300 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105 ${
-              !preview ? 'invisible' : ''
-            }`}
-          >
-            시연 영상
-          </Link>
+          <h3 className='text-sm md:text-base font-semibold truncate w-full max-w-full text-left text-zinc-600 dark:text-zinc-300'>
+            <span>구성: </span>
+            {composition}
+          </h3>
+          {links.map((link) => (
+            <LinkItem
+              key={link.label}
+              label={link.label}
+              url={link.url}
+              className={`text-base md:text-lg text-zinc-600 dark:text-zinc-400 hover:text-second hover:font-semibold dark:hover:text-point hover:scale-105`}
+              hidden={link.hidden}
+              use={'item'}
+            />
+          ))}
 
-          <span className='text-sm md:text-base font-medium flex items-start gap-2 text-gray-500 dark:text-gray-500 truncate w-full max-w-full overflow-x-scroll'>
+          <span className='text-sm md:text-base font-medium flex items-start gap-2 text-zinc-500 dark:text-zinc-500 truncate w-full max-w-full overflow-x-scroll'>
             작업 기간: {startDate} ~ {endDate}(
             {calculatePeriod(startDate, endDate)}일)
           </span>

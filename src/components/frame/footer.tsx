@@ -12,7 +12,7 @@ const Footer = () => {
           <p className='text-xs md:text-sm text-gray-500 ml-3'>
             © 2025 -
             <a
-              href='https://twitter.com/knyttneve'
+              href='mailto:dhdpekfa1@naver.com'
               rel='noopener noreferrer'
               className='text-gray-600 ml-1 md:ml-2'
               target='_blank'
