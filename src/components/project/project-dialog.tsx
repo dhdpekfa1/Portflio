@@ -25,6 +25,7 @@ interface ProjectDialogProps {
   githubUrl: string;
   deployment: string;
   preview: string;
+  composition: string;
 }
 
 const ProjectDialog = ({
@@ -35,6 +36,7 @@ const ProjectDialog = ({
   githubUrl,
   deployment,
   preview,
+  composition,
 }: ProjectDialogProps) => {
   const [blockData, setBlockData] = useState<Block[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -133,6 +135,9 @@ const ProjectDialog = ({
         <DialogHeader>
           <DialogTitle className='mb-2 text-2xl md:text-3xl font-bold text-second dark:text-second'>
             {title}
+            <p className='text-gray-600 dark:text-gray-300 text-sm md:text-base'>
+              {composition}
+            </p>
           </DialogTitle>
           <DialogDescription className='flex flex-col text-gray-500 dark:text-gray-400 -mt-6 text-sm md:text-base'>
             {description}

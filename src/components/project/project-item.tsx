@@ -18,8 +18,8 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
   const preview = data.properties.preview.url
     ? data.properties.preview.url
     : null;
+  const composition = data.properties.composition.rich_text[0].plain_text;
 
-  console.log(data.properties.deploymentURL.url);
   return (
     <ProjectDialog
       pageId={data.id}
@@ -28,6 +28,7 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
       githubUrl={githubUrl}
       deployment={deployment}
       preview={preview ? preview : ''}
+      composition={composition}
     >
       <div className='project_card w-full' key={data.id}>
         <div className='bg-black rounded-t-xl w-full md:h-[300px] overflow-hidden'>
@@ -55,6 +56,10 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
           </h2>
           <h3 className='text-base md:text-xl truncate w-full max-w-full text-left text-gray-500'>
             {description}
+          </h3>
+          <h3 className='text-base font-semibold md:text-xl truncate w-full max-w-full text-left text-gray-600 dark:text-gray-300'>
+            <span>구성: </span>
+            {composition}
           </h3>
           <Link
             href={deployment}
