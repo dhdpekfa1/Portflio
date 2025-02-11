@@ -4,13 +4,13 @@ import { Block } from '@/types/data';
 const getTextStyle = (type: string) => {
   switch (type) {
     case 'heading_1':
-      return 'text-2xl font-bold';
+      return 'text-xl md:text-2xl font-bold mt-3 md:mt-5';
     case 'heading_2':
-      return 'text-xl font-semibold';
+      return 'text-lg md:text-xl font-semibold mt-3 md:mt-5';
     case 'heading_3':
-      return 'text-lg font-medium';
+      return 'text-base md:text-lg font-semibold mt-3 md:mt-5';
     default:
-      return 'text-base';
+      return 'text-sm md:text-base';
   }
 };
 
