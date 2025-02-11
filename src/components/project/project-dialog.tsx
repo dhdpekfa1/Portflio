@@ -54,8 +54,6 @@ const ProjectDialog = ({
   const renderBlockContent = (block: Block) => {
     switch (block.type) {
       case 'image':
-        console.log('ㅇㅇㅇ', block.image);
-
         return block.image?.external?.url ? (
           <a
             href={block.image.external.url}
@@ -87,6 +85,12 @@ const ProjectDialog = ({
     }
   };
 
+  const handleLinkClick = (url: string, event: React.MouseEvent) => {
+    if (url.includes('ollin-portflio')) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <Dialog onOpenChange={setIsDialogOpen}>
       <DialogTrigger className='flex items-center justify-start'>
@@ -108,9 +112,12 @@ const ProjectDialog = ({
                   <Link
                     key={label}
                     href={url}
+                    onClick={(e) => handleLinkClick(url, e)}
                     className='text-sm md:text-base text-second dark:text-second hover:text-second hover:font-semibold dark:hover:text-point'
                   >
-                    👉🏻 {label}
+                    {url.includes('ollin-portflio')
+                      ? '현재 주소'
+                      : `👉🏻 ${label}`}
                   </Link>
                 ) : null
               )}
