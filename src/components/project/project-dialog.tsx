@@ -16,7 +16,7 @@ import {
 import { getBlockChildren } from '@/apis/data';
 import { Block } from '@/types/data';
 import { renderRichText, renderListItem } from '@/utils/render';
-import { LinkItem } from './ProjectLickItem';
+import { LinkLabel } from '@/components/project';
 
 interface ProjectDialogProps {
   children: ReactNode;
@@ -102,7 +102,7 @@ const ProjectDialog = ({
             {description}
             <span className='flex gap-4 overflow-x-scroll items-center justify-center md:justify-start md:mt-1'>
               {links.map((link) => (
-                <LinkItem
+                <LinkLabel
                   key={link.label}
                   label={link.label}
                   url={link.url}
@@ -137,4 +137,4 @@ const ProjectDialog = ({
   );
 };
 
-export default ProjectDialog;
+export { ProjectDialog };

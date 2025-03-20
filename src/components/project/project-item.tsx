@@ -2,8 +2,7 @@ import Image from 'next/image';
 import { NotionPage } from '@/types/data';
 import { ProjectAnimationLottie } from '@/components/animation';
 import { calculatePeriod } from '@/utils/helper';
-import ProjectDialog from './project-dialog';
-import { LinkItem } from './ProjectLickItem';
+import { ProjectDialog, LinkLabel } from '@/components/project';
 
 const ProjectItem = async ({ data }: { data: NotionPage }) => {
   const title = data.properties.Name.title?.[0]?.plain_text || 'Untitled';
@@ -35,7 +34,7 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
       links={links}
     >
       <div className='project_card w-full' key={data.id}>
-        <div className='bg-black rounded-t-xl w-full md:h-[300px] overflow-hidden'>
+        <div className='bg-black rounded-t-xl w-full md:h-[240px] overflow-hidden'>
           {coverUrl ? (
             <Image
               src={coverUrl}
@@ -66,7 +65,7 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
             {composition}
           </h3>
           {links.map((link) => (
-            <LinkItem
+            <LinkLabel
               key={link.label}
               label={link.label}
               url={link.url}
@@ -96,4 +95,4 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
   );
 };
 
-export default ProjectItem;
+export { ProjectItem };
