@@ -27,7 +27,6 @@ export const getDataList = async () => {
     if (!res || !res.data || !res.data.results) {
       throw new Error('Invalid response structure');
     }
-    console.log(res.data);
     return res.data.results;
   } catch (err) {
     console.error('Error querying Notion database:', err);

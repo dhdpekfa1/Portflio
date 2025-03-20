@@ -34,7 +34,7 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
       links={links}
     >
       <div className='project_card w-full' key={data.id}>
-        <div className='bg-black rounded-t-xl w-full md:h-[300px] overflow-hidden'>
+        <div className='bg-black rounded-t-xl w-full md:h-[240px] overflow-hidden'>
           {coverUrl ? (
             <Image
               src={coverUrl}
