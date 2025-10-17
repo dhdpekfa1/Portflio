@@ -10,14 +10,15 @@ const ProjectItem = async ({ data }: { data: NotionPage }) => {
   const githubUrl = data.properties.Github?.url || '#';
   const description =
     data.properties.Description.rich_text?.[0]?.plain_text || 'No description';
-  const tags = data.properties.tags.multi_select;
+  const tags = data.properties.tags?.multi_select || [];
   const startDate = data.properties.WorkPeriod.date?.start;
   const endDate = data.properties.WorkPeriod.date?.end;
-  const deployment = data.properties.deploymentURL.url;
-  const preview = data.properties.preview.url
+  const deployment = data.properties.deploymentURL?.url || '#';
+  const preview = data.properties.preview?.url
     ? data.properties.preview.url
     : null;
-  const composition = data.properties.composition.rich_text[0].plain_text;
+  const composition =
+    data.properties.composition?.rich_text?.[0]?.plain_text || '';
 
   const links = [
     { label: 'GitHub', url: githubUrl },
