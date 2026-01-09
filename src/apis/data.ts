@@ -41,7 +41,7 @@ export const getBlockChildren = async (blockId: string) => {
       throw new Error('Failed to fetch data');
     }
     const data = await response.json();
-    return data.results;
+    return data.results || [];
   } catch (error) {
     console.error('Error fetching Notion block children:', error);
     return [];

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { ThemeProvider } from 'next-themes';
 import { Roboto, Noto_Sans } from 'next/font/google';
 import { Footer, Header } from '@/components/frame';
+import { ThemeProvider } from '@/components/providers';
 import '../styles/globals.css';
 
 const roboto = Roboto({
@@ -49,13 +49,11 @@ export default function RootLayout({
       <head>
         <link rel='icon' href='/images/favicon.ico' />
       </head>
-      <body className={`${roboto.variable} ${notoSans.variable}`}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
+      <body
+        className={`${roboto.variable} ${notoSans.variable}`}
+        suppressHydrationWarning
+      >
+        <ThemeProvider>
           <Header />
           {children}
           <Footer />
