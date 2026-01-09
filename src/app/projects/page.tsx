@@ -17,7 +17,7 @@ const ProjectPage = async () => {
         프로젝트: <span className='text-point'>{visibleProjects.length}</span>개
       </h1>
       <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:w-full gap-6 lg:gap-8 m-6 pb-10 mb-8 items-center justify-center'>
-        {visibleProjects.reverse().map((project) => (
+        {[...visibleProjects].reverse().map((project) => (
           <ProjectItem key={project.id} data={project} />
         ))}
       </div>
