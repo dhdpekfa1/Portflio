@@ -122,6 +122,11 @@ export interface Properties {
       plain_text: string;
     }[];
   };
+  isHide: {
+    id: string;
+    type: 'checkbox';
+    checkbox: boolean;
+  };
 }
 
 // Data/Block
