@@ -15,7 +15,13 @@ import {
 } from '@/components/ui';
 import { getBlockChildren } from '@/apis/data';
 import { Block } from '@/types/data';
-import { renderRichText, renderListItem } from '@/utils/render';
+import {
+  renderRichText,
+  renderListItem,
+  renderQuoteBlock,
+  renderCodeBlock,
+  renderTodoBlock,
+} from '@/utils/render';
 import { LinkLabel } from '@/components/project';
 
 interface ProjectDialogProps {
@@ -80,6 +86,14 @@ const ProjectDialog = ({
       case 'bulleted_list_item':
       case 'numbered_list_item':
         return renderListItem(block);
+      case 'quote':
+        return renderQuoteBlock(block);
+      case 'code':
+        return renderCodeBlock(block);
+      case 'to_do':
+        return renderTodoBlock(block);
+      case 'divider':
+        return <Separator className='my-2 bg-zinc-300 dark:bg-zinc-600' />;
       default:
         return null;
     }
