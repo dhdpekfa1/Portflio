@@ -1,16 +1,45 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
+import {
+  fetchAllNotionBlockChildrenRecursive,
+  type NotionBlockNode,
+  type NotionBlockChildrenResponse,
+} from '@/utils/notion-recursive-fetch';
 
 const NOTION_API_BASE_URL = 'https://api.notion.com/v1';
+const NOTION_VERSION = '2022-06-28';
 
 // Next.js 15에서는 런타임에 환경 변수 확인
 function getNotionToken() {
   return process.env.NOTION_TOKEN;
 }
 
+const fetchChildrenPage = async (
+  blockId: string,
+  token: string,
+  startCursor?: string,
+): Promise<NotionBlockChildrenResponse<NotionBlockNode>> => {
+  const response = await axios.get(
+    `${NOTION_API_BASE_URL}/blocks/${blockId}/children`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Notion-Version': NOTION_VERSION,
+        'Content-Type': 'application/json',
+      },
+      params: {
+        page_size: 100,
+        ...(startCursor ? { start_cursor: startCursor } : {}),
+      },
+    },
+  );
+
+  return response.data;
+};
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ blockId: string }> }
+  { params }: { params: Promise<{ blockId: string }> },
 ): Promise<NextResponse> {
   try {
     const { blockId } = await params;
@@ -19,32 +48,23 @@ export async function GET(
     if (!NOTION_TOKEN) {
       return NextResponse.json(
         { error: 'Missing NOTION_TOKEN environment variable.' },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     if (!blockId) {
       return NextResponse.json(
         { error: 'Missing blockId parameter.' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    const response = await axios.get(
-      `${NOTION_API_BASE_URL}/blocks/${blockId}/children`,
-      {
-        headers: {
-          Authorization: `Bearer ${NOTION_TOKEN}`,
-          'Notion-Version': '2022-06-28',
-          'Content-Type': 'application/json',
-        },
-        params: {
-          page_size: 100,
-        },
-      }
+    const results = await fetchAllNotionBlockChildrenRecursive(
+      blockId,
+      (targetBlockId, startCursor) =>
+        fetchChildrenPage(targetBlockId, NOTION_TOKEN, startCursor),
     );
-
-    return NextResponse.json(response.data, { status: 200 });
+    return NextResponse.json({ results }, { status: 200 });
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       const statusCode = error.response?.status || 500;
@@ -62,7 +82,7 @@ export async function GET(
     } else {
       return NextResponse.json(
         { error: 'An unknown error occurred.' },
-        { status: 500 }
+        { status: 500 },
       );
     }
   }
