@@ -1,7 +1,13 @@
 'use client';
 
-import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Image from 'next/image';
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   Dialog,
   DialogTrigger,
@@ -15,13 +21,7 @@ import {
 } from '@/components/ui';
 import { getBlockChildren } from '@/apis/data';
 import { Block } from '@/types/data';
-import {
-  renderRichText,
-  renderListItem,
-  renderQuoteBlock,
-  renderCodeBlock,
-  renderTodoBlock,
-} from '@/utils/render';
+import { renderNotionBlock } from '@/utils/notion-block-renderer';
 import { LinkLabel } from '@/components/project';
 
 interface ProjectDialogProps {
@@ -36,7 +36,9 @@ interface ProjectDialogProps {
 const blockDataCache = new Map<string, Block[]>();
 const blockDataPending = new Map<string, Promise<Block[]>>();
 
-const fetchBlockChildrenWithCache = async (pageId: string): Promise<Block[]> => {
+const fetchBlockChildrenWithCache = async (
+  pageId: string,
+): Promise<Block[]> => {
   const cached = blockDataCache.get(pageId);
   if (cached) return cached;
 
@@ -59,7 +61,7 @@ const fetchBlockChildrenWithCache = async (pageId: string): Promise<Block[]> => 
   return request;
 };
 
-const ProjectDialog = ({
+export const ProjectDialog = ({
   children,
   pageId,
   title,
@@ -72,7 +74,9 @@ const ProjectDialog = ({
   });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasFetched, setHasFetched] = useState(() => blockDataCache.has(pageId));
+  const [hasFetched, setHasFetched] = useState(() =>
+    blockDataCache.has(pageId),
+  );
   const prefetchRequestedRef = useRef(false);
   const isMountedRef = useRef(true);
 
@@ -117,51 +121,13 @@ const ProjectDialog = ({
     void fetchData();
   }, [fetchData, hasFetched]);
 
-  const renderBlockContent = (block: Block) => {
-    switch (block.type) {
-      case 'image':
-        return block.image?.external?.url || block.image?.file?.url ? (
-          <a
-            href={block.image?.external?.url || block.image?.file?.url}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <Image
-              src={block.image?.external?.url || block.image?.file?.url || ''}
-              alt='Project Image'
-              width={800}
-              height={450}
-              className='rounded-lg'
-              sizes='(max-width: 768px) 95vw, 80vw'
-            />
-          </a>
-        ) : null;
-
-      case 'paragraph':
-      case 'heading_1':
-      case 'heading_2':
-      case 'heading_3':
-        return renderRichText(block, block.type);
-
-      case 'bulleted_list_item':
-      case 'numbered_list_item':
-        return renderListItem(block);
-      case 'quote':
-        return renderQuoteBlock(block);
-      case 'code':
-        return renderCodeBlock(block);
-      case 'to_do':
-        return renderTodoBlock(block);
-      case 'divider':
-        return <Separator className='my-2 bg-zinc-300 dark:bg-zinc-600' />;
-      default:
-        return null;
-    }
-  };
-
   const renderedBlocks = useMemo(() => {
     return blockData.map((block) => (
-      <div key={block.id}>{renderBlockContent(block)}</div>
+      <div key={block.id}>
+        {renderNotionBlock(block, {
+          imageAlt: 'Project Image',
+        })}
+      </div>
     ));
   }, [blockData]);
 
@@ -223,5 +189,3 @@ const ProjectDialog = ({
     </Dialog>
   );
 };
-
-export { ProjectDialog };

@@ -127,6 +127,11 @@ export interface Properties {
     type: 'checkbox';
     checkbox: boolean;
   };
+  order?: {
+    id: string;
+    type: 'number';
+    number: number | null;
+  };
 }
 
 // Data/Block
