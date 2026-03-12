@@ -46,13 +46,6 @@ const normalizeTitle = (value: string) => value.replace(/\s/g, '').trim();
 const getNameTitle = (page: NotionPage) =>
   page.properties?.Name?.title?.[0]?.plain_text || '';
 
-const getOrderNumber = (page: NotionPage) => {
-  const order = page.properties?.order;
-  return typeof order?.number === 'number'
-    ? order.number
-    : Number.NEGATIVE_INFINITY;
-};
-
 export const getAboutMePage = async (): Promise<NotionPage | null> => {
   try {
     const res = await notionClient.post(`/databases/${DATABASE_ID}/query`, {
@@ -74,19 +67,15 @@ export const getAboutMePage = async (): Promise<NotionPage | null> => {
     const results = (res?.data?.results || []) as NotionPage[];
     if (results.length === 0) return null;
 
-    const sortedResults = [...results].sort(
-      (a, b) => getOrderNumber(b) - getOrderNumber(a),
-    );
-
     const target =
-      sortedResults.find(
+      results.find(
         (page) =>
           normalizeTitle(getNameTitle(page)) === normalizeTitle('자기소개'),
       ) ||
-      sortedResults.find((page) =>
+      results.find((page) =>
         normalizeTitle(getNameTitle(page)).includes('자기소개'),
       ) ||
-      sortedResults[0];
+      results[0];
 
     return target || null;
   } catch (err) {
@@ -131,7 +120,7 @@ export const getBlockChildrenFromNotion = async (
           );
 
         return res.data;
-      }
+      },
     );
     return results as Block[];
   } catch (error) {

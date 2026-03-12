@@ -90,9 +90,7 @@ export const ProjectDialog = ({
   const fetchData = useCallback(async () => {
     if (hasFetched) return;
 
-    if (isMountedRef.current) {
-      setIsLoading(true);
-    }
+    setIsLoading(true);
     try {
       const data = await fetchBlockChildrenWithCache(pageId);
       if (!isMountedRef.current) return;
