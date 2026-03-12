@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
+import {
+  fetchAllNotionBlockChildrenRecursive,
+  type NotionBlockNode,
+  type NotionBlockChildrenResponse,
+} from '@/utils/notion-recursive-fetch';
 
 const NOTION_API_BASE_URL = 'https://api.notion.com/v1';
 const NOTION_VERSION = '2022-06-28';
@@ -9,22 +14,11 @@ function getNotionToken() {
   return process.env.NOTION_TOKEN;
 }
 
-type NotionBlock = {
-  id: string;
-  type: string;
-  has_children?: boolean;
-  [key: string]: unknown;
-};
-
 const fetchChildrenPage = async (
   blockId: string,
   token: string,
   startCursor?: string,
-): Promise<{
-  results: NotionBlock[];
-  has_more: boolean;
-  next_cursor: string | null;
-}> => {
+): Promise<NotionBlockChildrenResponse<NotionBlockNode>> => {
   const response = await axios.get(
     `${NOTION_API_BASE_URL}/blocks/${blockId}/children`,
     {
@@ -41,48 +35,6 @@ const fetchChildrenPage = async (
   );
 
   return response.data;
-};
-
-const fetchAllBlockChildrenRecursive = async (
-  blockId: string,
-  token: string,
-): Promise<NotionBlock[]> => {
-  const results: NotionBlock[] = [];
-  let nextCursor: string | null | undefined = undefined;
-  let hasMore = true;
-
-  while (hasMore) {
-    const page = await fetchChildrenPage(
-      blockId,
-      token,
-      nextCursor || undefined,
-    );
-    results.push(...(page.results || []));
-    hasMore = page.has_more;
-    nextCursor = page.next_cursor;
-  }
-
-  const blocksWithChildren = await Promise.all(
-    results.map(async (block) => {
-      if (!block.has_children) return block;
-
-      const children = await fetchAllBlockChildrenRecursive(block.id, token);
-      const blockContent =
-        typeof block[block.type] === 'object' && block[block.type] !== null
-          ? (block[block.type] as Record<string, unknown>)
-          : {};
-
-      return {
-        ...block,
-        [block.type]: {
-          ...blockContent,
-          children,
-        },
-      };
-    }),
-  );
-
-  return blocksWithChildren;
 };
 
 export async function GET(
@@ -107,7 +59,11 @@ export async function GET(
       );
     }
 
-    const results = await fetchAllBlockChildrenRecursive(blockId, NOTION_TOKEN);
+    const results = await fetchAllNotionBlockChildrenRecursive(
+      blockId,
+      (targetBlockId, startCursor) =>
+        fetchChildrenPage(targetBlockId, NOTION_TOKEN, startCursor),
+    );
     return NextResponse.json({ results }, { status: 200 });
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {

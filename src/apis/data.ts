@@ -1,5 +1,10 @@
 import axios from 'axios';
 import { Block, NotionPage } from '@/types/data';
+import {
+  fetchAllNotionBlockChildrenRecursive,
+  type NotionBlockNode,
+  type NotionBlockChildrenResponse,
+} from '@/utils/notion-recursive-fetch';
 
 const NOTION_API_BASE_URL = 'https://api.notion.com/v1';
 const TOKEN = process.env.NOTION_TOKEN;
@@ -14,19 +19,6 @@ const notionClient = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
-type NotionBlock = {
-  id: string;
-  type: string;
-  has_children?: boolean;
-  [key: string]: unknown;
-};
-
-type NotionBlockChildrenResponse = {
-  results?: NotionBlock[];
-  has_more?: boolean;
-  next_cursor?: string | null;
-};
 
 export const getDataList = async () => {
   try {
@@ -120,54 +112,27 @@ export const getBlockChildren = async (blockId: string) => {
 export const getBlockChildrenFromNotion = async (
   blockId: string,
 ): Promise<Block[]> => {
-  const fetchAllChildrenRecursive = async (
-    targetBlockId: string,
-  ): Promise<NotionBlock[]> => {
-    const collected: NotionBlock[] = [];
-    let hasMore = true;
-    let nextCursor: string | null | undefined = undefined;
-
-    while (hasMore) {
-      const res: { data: NotionBlockChildrenResponse } =
-        await notionClient.get<NotionBlockChildrenResponse>(
-          `/blocks/${targetBlockId}/children`,
-          {
-            params: {
-              page_size: 100,
-              ...(nextCursor ? { start_cursor: nextCursor } : {}),
-            },
-          },
-        );
-
-      const pageResults = (res.data?.results || []) as NotionBlock[];
-      collected.push(...pageResults);
-      hasMore = Boolean(res.data?.has_more);
-      nextCursor = res.data?.next_cursor;
-    }
-
-    return Promise.all(
-      collected.map(async (block) => {
-        if (!block.has_children) return block;
-
-        const children = await fetchAllChildrenRecursive(block.id);
-        const blockContent =
-          typeof block[block.type] === 'object' && block[block.type] !== null
-            ? (block[block.type] as Record<string, unknown>)
-            : {};
-
-        return {
-          ...block,
-          [block.type]: {
-            ...blockContent,
-            children,
-          },
-        };
-      }),
-    );
-  };
-
   try {
-    const results = await fetchAllChildrenRecursive(blockId);
+    const results = await fetchAllNotionBlockChildrenRecursive(
+      blockId,
+      async (
+        targetBlockId,
+        startCursor,
+      ): Promise<NotionBlockChildrenResponse<NotionBlockNode>> => {
+        const res: { data: NotionBlockChildrenResponse<NotionBlockNode> } =
+          await notionClient.get<NotionBlockChildrenResponse<NotionBlockNode>>(
+            `/blocks/${targetBlockId}/children`,
+            {
+              params: {
+                page_size: 100,
+                ...(startCursor ? { start_cursor: startCursor } : {}),
+              },
+            },
+          );
+
+        return res.data;
+      }
+    );
     return results as Block[];
   } catch (error) {
     console.error('Error fetching Notion blocks from server:', error);
